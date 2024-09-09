@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-// Initialization for ES Users
-import { Collapse, Ripple, initMDB } from 'mdb-ui-kit';
-
-initMDB({ Collapse, Ripple });
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

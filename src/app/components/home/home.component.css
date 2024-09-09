@@ -1,4 +1,6 @@
-h2 {
-    color: white;
-    font-size: 300px;
+.card {
+    background: rgb(35,2,93);
+    background: linear-gradient(180deg, rgba(35,2,93,1) 0%, rgba(35,2,93,0.35) 30%, rgba(35,2,93,0) 50%, rgba(35,2,93,0.35) 70%, rgba(35,2,93,1) 100%);
+
+    color: gainsboro;
 }
