@@ -4,3 +4,8 @@
 
     color: gainsboro;
 }
+
+img {
+    min-height: 260px;
+    width:auto;
+}
