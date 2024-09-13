@@ -27,6 +27,7 @@ export class LoginComponent {
     this.isLoading = true;
 
     if (email == "candela@mail.com" && password == "123456") {
+      console.log(email, password);
       this.router.navigateByUrl('/home');
     }
 
