@@ -5,7 +5,9 @@ import { CommonModule } from '@angular/common';
 // import { Observable } from 'rxjs';
 // import { AuthResponseData, AuthService } from './auth.service';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { addDoc, collection, collectionData, Firestore } from '@angular/fire/firestore';
 
+import { BehaviorSubject, Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,23 +19,27 @@ import Swal from 'sweetalert2';
 })
 
 export class LoginComponent {
-  isLoading: boolean = false;
-  isLogin: boolean = true;
-  usuarioMail: string = '';
-  errorMensaje: string = '';
+  private isLoading: boolean = false;
+  public isLogin: boolean = true;
+  private usuarioMail: string = '';
+  private errorMensaje: string = '';
+  public loginsCollection:any[] = [];
+  public countLogins:number = 0;
+  private sub!:Subscription;
   
   constructor(
     // private authService: AuthService, 
     private router: Router,
-    public auth: Auth
+    public auth: Auth,
+    private firestore: Firestore
   ) {}
 
-  authenticate (email: string, password: string) {
+  async authenticate (email: string, password: string) {
     this.isLoading = true;
 
     //Chequea si el usuario se quiere loguear o si quiere crear una nueva cuenta y hace el llamado a la api según lo que necesita
     if (this.isLogin) {
-      signInWithEmailAndPassword(this.auth, email, password).then((res) => {
+      await signInWithEmailAndPassword(this.auth, email, password).then((res) => {
         if (res.user.email !== null) {
           this.usuarioMail = res.user.email;
           this.router.navigateByUrl('/home');
@@ -57,7 +63,7 @@ export class LoginComponent {
         });
       })
     } else {
-      createUserWithEmailAndPassword(this.auth, email, password).then((res) => {
+      await createUserWithEmailAndPassword(this.auth, email, password).then((res) => {
         if (res.user.email !== null) {
           this.usuarioMail = res.user.email;
           Swal.fire({
@@ -87,9 +93,11 @@ export class LoginComponent {
         });
       });
     }
+
+    this.registrarLogUsuario();
   }
 
-  onSubmit(authform: NgForm) {
+  onSubmit (authform: NgForm) {
     if (!authform.valid) {
       return;
     }
@@ -102,11 +110,11 @@ export class LoginComponent {
     this.authenticate(email, password);
   }
 
-  cambiarEntreIngresoYRegistro() {
+  cambiarEntreIngresoYRegistro () {
     this.isLogin = !this.isLogin;
   }
 
-  logout(){
+  logout (){
     signOut(this.auth).then(() => {
       console.log(this.auth.currentUser?.email)
     })
@@ -115,6 +123,22 @@ export class LoginComponent {
   loginRapido (authform: NgForm, email: string, password: string) {
     authform.controls['email'].setValue(email);
     authform.controls['password'].setValue(password);
+  }
+
+  registrarLogUsuario () {
+    let col = collection(this.firestore, 'logins');
+    addDoc(col, { fecha: new Date(), "usuario": this.usuarioMail});
+  }
+
+  getLoginsUsuarios () {
+    let col = collection(this.firestore, 'logins');
+    const observable = collectionData(col);
+
+    this.sub = observable.subscribe((respuesta:any) => {
+      this.loginsCollection = respuesta;
+      this.countLogins = this.loginsCollection.length;
+      console.log(respuesta);
+    })
   }
 
 }
