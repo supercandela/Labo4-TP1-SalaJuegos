@@ -114,11 +114,11 @@ export class LoginComponent {
     this.isLogin = !this.isLogin;
   }
 
-  logout (){
-    signOut(this.auth).then(() => {
-      console.log(this.auth.currentUser?.email)
-    })
-  }
+  // logout (){
+  //   signOut(this.auth).then(() => {
+  //     console.log(this.auth.currentUser?.email)
+  //   })
+  // }
 
   loginRapido (authform: NgForm, email: string, password: string) {
     authform.controls['email'].setValue(email);
