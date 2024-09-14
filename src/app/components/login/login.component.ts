@@ -4,7 +4,9 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 // import { Observable } from 'rxjs';
 // import { AuthResponseData, AuthService } from './auth.service';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -15,57 +17,76 @@ import { CommonModule } from '@angular/common';
 })
 
 export class LoginComponent {
-  isLoading = false;
-  isLogin = true;
-
+  isLoading: boolean = false;
+  isLogin: boolean = true;
+  usuarioMail: string = '';
+  errorMensaje: string = '';
+  
   constructor(
     // private authService: AuthService, 
-    private router: Router
+    private router: Router,
+    public auth: Auth
   ) {}
 
   authenticate (email: string, password: string) {
     this.isLoading = true;
 
-    if (email == "candela@mail.com" && password == "123456") {
-      console.log(email, password);
-      this.router.navigateByUrl('/home');
+    //Chequea si el usuario se quiere loguear o si quiere crear una nueva cuenta y hace el llamado a la api según lo que necesita
+    if (this.isLogin) {
+      signInWithEmailAndPassword(this.auth, email, password).then((res) => {
+        if (res.user.email !== null) {
+          this.usuarioMail = res.user.email;
+          this.router.navigateByUrl('/home');
+        }
+      }).catch((e) => {
+        switch (e.code) {
+          case "auth/invalid-credential":
+            this.errorMensaje = "El email ingresado no está registrado.";
+            break;
+          case "auth/email-already-in-use":
+            this.errorMensaje = "El email ingresado ya está registrado.";
+            break;
+          default:
+            this.errorMensaje = e.code
+            break;
+        }
+        Swal.fire({
+          icon: "error",
+          title: "Algo salió mal...", 
+          text: this.errorMensaje
+        });
+      })
+    } else {
+      createUserWithEmailAndPassword(this.auth, email, password).then((res) => {
+        if (res.user.email !== null) {
+          this.usuarioMail = res.user.email;
+          Swal.fire({
+            icon: "success",
+            title: "¡Bienvenido!", 
+            text: "Usuario creado con éxito."
+          });
+          this.router.navigateByUrl('/home');
+        }       
+      }).catch((e) => {
+        console.log(e);
+        switch (e.code) {
+          case "auth/invalid-email":
+            this.errorMensaje = "El email ingresado no es válido.";
+            break;
+          case "auth/email-already-in-use":
+            this.errorMensaje = "El email ingresado ya está registrado.";
+            break;
+          default:
+            this.errorMensaje = e.code
+            break;
+        }
+        Swal.fire({
+          icon: "error",
+          title: "Algo salió mal...", 
+          text: this.errorMensaje
+        });
+      });
     }
-
-    // this.loadingCtrl
-    //   .create({ keyboardClose: true, message: 'Ingresando, aguarde unos instantes...' })
-    //   .then(loadingEl => {
-    //     loadingEl.present();
-
-    //     let authObs: Observable<AuthResponseData>;
-
-    //     //Chequea si el usuario se quiere loguear o si quiere crear una nueva cuenta y hace el llamado a la api según lo que necesita
-    //     if (this.isLogin) {
-    //       authObs = this.authService.login(email, password);
-    //     } else {
-    //       authObs = this.authService.signup(email, password);
-    //     }
-    //     authObs.subscribe(resData => {
-    //         console.log(resData);
-    //         this.isLoading = false;
-    //         loadingEl.dismiss();
-    //         this.router.navigateByUrl('/recipes');
-    //       }, errorRes => {
-    //         loadingEl.dismiss();
-    //         const code = errorRes.error.error.message;
-    //         let message = 'Could not sign you up, please try again.';
-    //         //Chequea el error y sobre escribe el mensaje que se muestra al usuario
-    //         if (code === 'EMAIL_EXISTS') {
-    //           message = 'This email address exists already!';
-    //         } else if (code === 'EMAIL_NOT_FOUND') {
-    //           message = 'E-Mail address could bot be found.';
-    //         } else if (code === 'INVALID_PASSWORD') {
-    //           message = 'The password is not correct.';
-    //         } else if (code === 'INVALID_LOGIN_CREDENTIALS') {
-    //           message = 'E-Mail address or password is not correct. Please, enter them again.'
-    //         }
-    //         this.showAlert(message);
-    //       });
-    //   });
   }
 
   onSubmit(authform: NgForm) {
@@ -85,10 +106,15 @@ export class LoginComponent {
     this.isLogin = !this.isLogin;
   }
 
-  // loginRapido (authform: NgForm, email: string, password: string) {
-  //   authform.controls['email'].setValue(email);
-  //   authform.controls['password'].setValue(password);
-  // }
+  logout(){
+    signOut(this.auth).then(() => {
+      console.log(this.auth.currentUser?.email)
+    })
+  }
+
+  loginRapido (authform: NgForm, email: string, password: string) {
+    authform.controls['email'].setValue(email);
+    authform.controls['password'].setValue(password);
+  }
 
 }
-
