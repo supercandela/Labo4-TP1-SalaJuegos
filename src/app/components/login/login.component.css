@@ -9,9 +9,6 @@
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
 
-.avatares-en-linea {
-    flex-wrap: nowrap;
-}
 
 .boton-avatar {
     background-color: transparent;
@@ -22,4 +19,22 @@
 .imagen-avatar>img {
     max-width: 100px;
     border-radius: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+    .columna-avatar {
+        max-width: 80px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .columna-avatar > button {
+        max-width: 80px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .imagen-avatar>img {
+        max-width: 80px;
+    }
 }
