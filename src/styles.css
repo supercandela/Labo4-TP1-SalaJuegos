@@ -1,13 +1,8 @@
 body {
-    background: #6a11cb;
+    background-color: #6a11cb;
     background-image: url("./assets/background.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-@media only screen and (max-width: 600px) {
-    body {
-        background-size: auto;
-    }
+    background-attachment: fixed;
 }
