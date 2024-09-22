@@ -8,3 +8,12 @@
     font-size: small;
     background: rgb(0,0,0);
 }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 3em;
+    height: 3em;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+}
