@@ -1,3 +1,59 @@
 <app-header></app-header>
 
-<img src="../../../../../assets/sobre-mi-1-Yo.png" alt="Dibujo Candela" class="w-100 d-block">
+<div class="hangman-container container-fluid">
+    <div class="row justify-content-center mt-4 juego-header">
+      <div class="col-12 text-center">
+        <h3>Ahorcado</h3>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 text-center">
+          <h4>Puntos: {{ puntaje }}</h4>
+        </div>
+      </div>
+
+
+ <!-- Sección principal del ahorcado y los botones -->
+ <div class="row justify-content-center align-items-center mt-4">
+      
+    <!-- Columna de la figura del ahorcado -->
+    <div class="col-md-6 text-center">
+      <!-- Aquí mostramos la imagen del ahorcado correspondiente -->
+      <img [src]="hangmanImage" alt="Ahorcado" class="hangman-image">
+    </div>
+
+    <!-- Columna de botones de letras -->
+    <div class="col-md-6 text-center">
+      <div class="letters-container">
+        <div *ngFor="let letter of alphabet">
+          <button 
+            class="btn btn-letter" 
+            [disabled]="usedLetters.includes(letter)" 
+            (click)="guessLetter(letter)">
+            {{ letter }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Palabra oculta con guiones -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 text-center">
+          <h4>{{ displayedWord }}</h4>
+        </div>
+      </div>
+
+
+
+
+
+
+  
+    <div class="row justify-content-center mt-4">
+      <div class="col-auto">
+        <button class="btn btn-warning" (click)="resetGame()">Reiniciar Partida</button>
+      </div>
+    </div>
+  </div>

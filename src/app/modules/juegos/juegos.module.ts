@@ -7,6 +7,7 @@ import { MayorOMenorComponent } from './componentes/mayor-o-menor/mayor-o-menor.
 import { PreguntadosComponent } from './componentes/preguntados/preguntados.component';
 import { CodigoSecretoComponent } from './componentes/codigo-secreto/codigo-secreto.component';
 import { HeaderComponent } from '../../components/header/header.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { HeaderComponent } from '../../components/header/header.component';
   imports: [
     CommonModule,
     JuegosRoutingModule,
-    HeaderComponent
+    HeaderComponent,
+    FormsModule
   ]
 })
 export class JuegosModule { }
