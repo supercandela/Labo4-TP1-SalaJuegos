@@ -1,59 +1,48 @@
 <app-header></app-header>
 
-<div class="hangman-container container-fluid">
-    <div class="row justify-content-center mt-4 juego-header">
-      <div class="col-12 text-center">
-        <h3>Ahorcado</h3>
-      </div>
-    </div>
-
-    <div class="row justify-content-center mt-4">
+<div class="ahorcado-container container-fluid">
+    <div class="row justify-content-center juego-header">
         <div class="col-12 text-center">
-          <h4>Puntos: {{ puntaje }}</h4>
+            <h3>Ahorcado</h3>
         </div>
-      </div>
-
-
- <!-- Sección principal del ahorcado y los botones -->
- <div class="row justify-content-center align-items-center mt-4">
-      
-    <!-- Columna de la figura del ahorcado -->
-    <div class="col-md-6 text-center">
-      <!-- Aquí mostramos la imagen del ahorcado correspondiente -->
-      <img [src]="hangmanImage" alt="Ahorcado" class="hangman-image">
     </div>
 
-    <!-- Columna de botones de letras -->
-    <div class="col-md-6 text-center">
-      <div class="letters-container">
-        <div *ngFor="let letter of alphabet">
-          <button 
-            class="btn btn-letter" 
-            [disabled]="usedLetters.includes(letter)" 
-            (click)="guessLetter(letter)">
-            {{ letter }}
-          </button>
+    <div class="row justify-content-center mt-2">
+        <div class="col-12 text-center">
+            <h4>Puntos: {{ puntaje }}</h4>
         </div>
-      </div>
     </div>
-  </div>
+
+    <!-- Sección principal del ahorcado y los botones -->
+    <div class="row justify-content-center align-items-center">
+        <!-- Columna de la figura del ahorcado -->
+        <div class="col-sm-10 offset-sm-1 col-md-4 offset-md-0 text-center">
+            <!-- Aquí mostramos la imagen del ahorcado correspondiente -->
+            <img [src]="imagenAhorcadoAMostrar" alt="Ahorcado" class="ahorcado-image">
+        </div>
+        <!-- Columna de botones de letras -->
+        <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-0 text-center">
+            <div class="letras-container">
+                <div *ngFor="let letra of alfabeto">
+                    <button class="btn btn-letra" [disabled]="letrasUsadas.includes(letra)"
+                        (click)="arriesgarLetra(letra)">
+                        {{ letra }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Palabra oculta con guiones -->
-    <div class="row justify-content-center mt-4">
-        <div class="col-12 text-center">
-          <h4>{{ displayedWord }}</h4>
+    <div class="row justify-content-center mt-2">
+        <div class="col-12 text-center palabra-a-descubrir">
+            <h4>{{ palabraMostrada }}</h4>
         </div>
-      </div>
-
-
-
-
-
-
-  
-    <div class="row justify-content-center mt-4">
-      <div class="col-auto">
-        <button class="btn btn-warning" (click)="resetGame()">Reiniciar Partida</button>
-      </div>
     </div>
-  </div>
+
+    <div class="row justify-content-center mt-2">
+        <div class="col-auto">
+            <button class="btn btn-warning" (click)="reiniciarPartida()">Reiniciar Partida</button>
+        </div>
+    </div>
+</div>
