@@ -1,3 +1,49 @@
 <app-header></app-header>
 
+<div class="card-game-container container-fluid">
+    <div class="row justify-content-center mt-4 juego-header">
+      <div class="col-12 text-center">
+        <h3>¿Mayor o menor?</h3>
+      </div>
+    </div>
 
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 text-center">
+          <h4>Puntos: {{ puntaje }}</h4>
+        </div>
+      </div>
+  
+    <div class="row justify-content-center mt-4">
+      <div class="col-auto">
+        <img [src]="cardImage" alt="Carta actual" class="card-image">
+      </div>
+    </div>
+  
+    <div class="row justify-content-center mt-4">
+      <div class="col-auto">
+        <button class="btn btn-primary" [disabled]="partidaFinalizada" (click)="suponerProximaCarta('mayor')">Mayor</button>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-secondary" [disabled]="partidaFinalizada" (click)="suponerProximaCarta('igual')">Igual</button>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-danger" [disabled]="partidaFinalizada" (click)="suponerProximaCarta('menor')">Menor</button>
+      </div>
+    </div>
+  
+    <div class="row justify-content-center mt-4">
+      <div class="col-12 text-center">
+        <!-- Mensaje de acierto o error -->
+        <p class="result-message" [ngClass]="{'success-message': esCorrecto, 'error-message': !esCorrecto}">
+          {{ mensajePostEleccion }}
+        </p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-auto">
+          <button class="btn btn-warning" (click)="reiniciarPartida()">Reiniciar Partida</button>
+        </div>
+      </div>
+
+  </div>

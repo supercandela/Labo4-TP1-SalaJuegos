@@ -16,7 +16,7 @@ export class CartasService {
   }
 
   getCartas (idMazo: string) {
-    return this.http.get<any[]>(`https://www.deckofcardsapi.com/api/deck/${idMazo}/draw/?count=1`);
+    return this.http.get<any[]>(`https://www.deckofcardsapi.com/api/deck/${idMazo}/draw/?count=52`);
   }
 
   mezclarCartas (idMazo: string) {

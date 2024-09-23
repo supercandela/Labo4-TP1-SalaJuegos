@@ -26,13 +26,6 @@ export class ChatService {
     let col = collection(this.firestore, 'chat');
     const filteredQuery = query(col, orderBy('fecha', 'asc'));
     const observable = collectionData(filteredQuery);
-    console.log(observable);
     return observable;
-
-    // this.sub = observable.subscribe((respuesta: any) => {
-    //   this.loginsCollection = respuesta;
-    //   this.countLogins = this.loginsCollection.length;
-    //   console.log(respuesta);
-    // });
   }
 }
