@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { ChatService } from '../../services/chat.service';
@@ -13,11 +13,12 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked  {
   sub?: Subscription;
   nuevoMensaje: string = '';
   usuario: string = '';
   mensajes: any[] = [];
+  @ViewChild('scrollAnchor') private scrollAnchor?: ElementRef;
 
   constructor (
     private authService: AuthService,
@@ -37,6 +38,17 @@ export class ChatComponent implements OnInit, OnDestroy {
     if (this.nuevoMensaje.trim() != '') {
       this.chatService.registrarMensaje(this.usuario, this.nuevoMensaje);
       this.nuevoMensaje = '';
+      this.scrollToBottom();
+    }
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    if (this.scrollAnchor) {
+      this.scrollAnchor.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
