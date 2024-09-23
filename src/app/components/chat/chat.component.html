@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<div class="chat-container container-fluid col-md-8 offset-md-2">
+    <div class="row chat-header">
+      <div class="col-12">
+        <h3>Sala de chat</h3>
+      </div>
+    </div>
+    
+    <div class="row chat-body">
+      <div class="col-12 chat-messages" *ngFor="let mensaje of mensajes">
+        <div class="message" [ngClass]="mensaje.usuario == usuario ? 'my-message' : 'other-message'">
+          <div class="message-content">
+            <p class="nombre-usuario">{{ mensaje.usuario }}</p>
+            <p class="fecha"> {{ (mensaje.fecha.seconds * 1000) | date:'dd-MM-yy HH:mm' }}</p>
+            <p class="mensaje">{{ mensaje.mensaje }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row chat-footer">
+      <div class="col-10">
+        <input type="text" class="form-control" placeholder="Escribe un mensaje..." [(ngModel)]="nuevoMensaje">
+      </div>
+      <div class="col-2">
+        <button class="btn w-100" (click)="enviarMensaje()">Enviar</button>
+      </div>
+    </div>
+  </div>
+  

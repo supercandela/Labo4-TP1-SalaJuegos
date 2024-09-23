@@ -1,0 +1,80 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+  }
+  
+  .chat-header {
+    color: red;
+    padding: 10px;
+    text-align: center;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5942752100840336) 30%, rgba(0,0,0,0.33657212885154064) 50%, rgba(0,0,0,0.6587009803921569) 70%, rgba(0,0,0,1) 100%);
+  }
+  
+  .chat-body {
+    /* flex-grow: 1; */
+    overflow-y: auto;
+    padding: 10px;
+    background: transparent
+  }
+  
+  .chat-messages {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .message {
+    max-width: 70%;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 15px;
+    word-wrap: break-word;
+  }
+  
+  .my-message {
+    align-self: flex-end;
+    background: rgba(255, 63, 63, 0.5);
+    color: gainsboro;
+  }
+  
+  .other-message {
+    align-self: flex-start;
+    background: rgba(35,2,93,0.8);
+    color: gainsboro;
+  }
+
+  .nombre-usuario {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+    margin-right: 0.2rem;
+  }
+
+  .fecha {
+    display: inline-block;
+    margin-bottom: 0.2rem;
+  }
+  
+  .chat-footer {
+    padding: 10px;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5942752100840336) 30%, rgba(0,0,0,0.33657212885154064) 50%, rgba(0,0,0,0.6587009803921569) 70%, rgba(0,0,0,1) 100%);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat-footer input {
+    height: 45px;
+    font-size: 16px;
+    background-color: gray;
+    color: gainsboro;
+  }
+  
+  .chat-footer button {
+    height: 45px;
+    font-size: 16px;
+    background-color: rgba(255,0,0,0.75);
+    color: gainsboro;
+  }

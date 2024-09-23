@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
-
-import { Auth, signOut } from '@angular/fire/auth';
-
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,18 +9,20 @@ import { Auth, signOut } from '@angular/fire/auth';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   nombreUsuario: string = '';
 
   constructor(
     // private authService: AuthService, 
     private router: Router,
-    private auth: Auth
+    private authService: AuthService
   ) {}
+  ngOnInit(): void {
+    this.nombreUsuario = this.authService.getUsuario();
+  }
 
   cerrarSesion (){
-    signOut(this.auth).then(() => {
-      console.log(this.auth.currentUser?.email)
-    })
+    this.authService.logout();
+    this.router.navigateByUrl('login');
   }
 }
