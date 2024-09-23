@@ -29,6 +29,11 @@
     width: 100px;
     font-size: 18px;
     margin: 5px;
+    border: none;
+  }
+
+  .btn-primary {
+    background-color: purple;
   }
   
   .result-message {
@@ -49,4 +54,6 @@
     font-size: 18px;
     width: 150px;
     margin-top: 20px;
+    background-color: navy;
+    color: gainsboro;
   }
