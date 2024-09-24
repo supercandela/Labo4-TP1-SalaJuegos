@@ -472,6 +472,7 @@ export class AhorcadoComponent {
   reiniciarPartida() {
     this.palabraAAdivinar = this.obtenerPalabra(); // Selecciona una palabra aleatoria
     this.errores = 0;
+    this.puntaje = 0;
     this.imagenAhorcadoAMostrar = this.imagenesAhorcado[0];
     this.letrasUsadas = [];
     this.palabraMostrada = this.palabraAAdivinar.replace(/./g, '_');
@@ -485,6 +486,9 @@ export class AhorcadoComponent {
       let updatedWord = '';
       for (let i = 0; i < this.palabraAAdivinar.length; i++) {
         if (this.palabraAAdivinar[i].toUpperCase() === letra) {
+          //Sumar puntos por letra adivinada
+          let puntosPorLetraAdivinada = 20 / this.palabraAAdivinar.length;
+          this.puntaje += parseFloat(puntosPorLetraAdivinada.toFixed(2));
           updatedWord += this.palabraAAdivinar[i];
         } else {
           updatedWord += this.palabraMostrada[i];
@@ -510,6 +514,10 @@ export class AhorcadoComponent {
       for (let i = 0; i < this.alfabeto.length; i++) {
         this.letrasUsadas.push(this.alfabeto[i]);
       }
+      //Sumar puntos al adivinar la palabra
+      let puntajeFinal = this.puntaje * (this.puntaje/this.palabraAAdivinar.length);
+      let puntajeRedondeado = puntajeFinal.toFixed(2);
+      this.puntaje = parseFloat(puntajeRedondeado);
       Swal.fire({
         icon: 'success',
         title: '¡Ganaste!',
