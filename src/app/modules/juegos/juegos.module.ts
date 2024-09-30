@@ -17,12 +17,6 @@ import { FormsModule } from '@angular/forms';
     PreguntadosComponent,
     CodigoSecretoComponent
   ],
-  exports: [
-    AhorcadoComponent,
-    MayorOMenorComponent,
-    PreguntadosComponent,
-    CodigoSecretoComponent
-  ],
   imports: [
     CommonModule,
     JuegosRoutingModule,

@@ -6,10 +6,10 @@ import { ChatComponent } from './components/chat/chat.component';
 
 export const routes: Routes = [
     
-    { path: '', redirectTo: '/login', pathMatch: "full" },
+    { path: '', redirectTo: '/home', pathMatch: "full" },
 
-    { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
     { path: 'chat', component: ChatComponent },
     { path: 'sobremi', component: SobremiComponent },
 

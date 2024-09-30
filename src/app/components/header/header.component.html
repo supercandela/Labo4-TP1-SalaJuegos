@@ -27,7 +27,7 @@
 
             </div>
 
-            <button class="btn boton-cerrar-sesion btn-outline-danger text-nowrap" type="button" data-toggle="collapse" data-target="#paraCerrarSesion"
+            <button *ngIf="tieneSesionActiva" class="btn btn-outline-danger text-nowrap" type="button" data-toggle="collapse" data-target="#paraCerrarSesion"
                 aria-expanded="false" aria-controls="paraCerrarSesion">
                 Bienvenidx, {{ nombreUsuario }}
             </button>
@@ -37,6 +37,10 @@
                     Cerrar sesión
                 </button>
             </div>
+
+            <button *ngIf="!tieneSesionActiva" class="btn btn-danger text-nowrap" type="button" routerLink="/login">
+                Iniciar sesión
+            </button>
 
         </nav>
     </div>
