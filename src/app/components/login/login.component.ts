@@ -56,8 +56,11 @@ export class LoginComponent {
         })
         .catch((e) => {
           switch (e.code) {
+            case 'auth/weak-password':
+              this.errorMensaje = 'La clave es muy débil. Debe tener al menos 6 caracteres.';
+              break;
             case 'auth/invalid-credential':
-              this.errorMensaje = 'El email ingresado no está registrado.';
+              this.errorMensaje = 'Usuario o contraseña incorrectos. Verificá tus credenciales.';
               break;
             case 'auth/email-already-in-use':
               this.errorMensaje = 'El email ingresado ya está registrado.';
@@ -85,8 +88,6 @@ export class LoginComponent {
 
     const email = authform.value.email;
     const password = authform.value.password;
-
-    console.log(email, password);
 
     this.authenticate(email, password);
   }

@@ -12,7 +12,7 @@
                                 <p class="text-white-50 mb-4">Ingresá correo y contraseña</p>
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
-                                    <input type="email" id="typeEmailX" class="form-control form-control-lg"
+                                    <input id="typeEmailX" class="form-control form-control-lg"
                                         placeholder="usuario@mail.com" ngModel name="email" required email
                                         #emailCtrl="ngModel" />
                                     <label class="form-label" for="typeEmailX">Correo Electrónico</label>
@@ -20,8 +20,7 @@
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
                                     <input type="password" id="typePasswordX" class="form-control form-control-lg"
-                                        ngModel name="password" required password #passwordCtrl="ngModel"
-                                        minlength="6" />
+                                        ngModel name="password" required password #passwordCtrl="ngModel" />
                                     <label class="form-label" for="typePasswordX">Contraseña</label>
                                 </div>
 
