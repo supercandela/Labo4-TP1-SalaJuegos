@@ -25,7 +25,7 @@ export class PreguntadosComponent implements OnInit {
   subPersonajes?: Subscription;
   randomCharacter?: MarvelCharacter;
   characterImageUrl: string = '';
-  vidas: number = 3;
+  vidas: number = 5;
   puntaje: number = 0;
 
   constructor(
