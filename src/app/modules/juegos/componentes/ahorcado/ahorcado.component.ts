@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-ahorcado',
@@ -8,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class AhorcadoComponent {
   puntaje: number = 0;
+  private usuarioMail: string = '';
   palabraAAdivinar: string = ''; // La palabra que hay que adivinar
   palabraMostrada: string = ''; // La palabra que se muestra con guiones
   errores: number = 0; // Numero de errores cometidos
@@ -459,7 +462,7 @@ export class AhorcadoComponent {
 
   imagenAhorcadoAMostrar: string = this.imagenesAhorcado[0]; // Imagen actual del ahorcado
 
-  constructor() {
+  constructor(private firestore: Firestore, private authService: AuthService) {
     this.reiniciarPartida();
   }
 
@@ -515,7 +518,8 @@ export class AhorcadoComponent {
         this.letrasUsadas.push(this.alfabeto[i]);
       }
       //Sumar puntos al adivinar la palabra
-      let puntajeFinal = this.puntaje * (this.puntaje/this.palabraAAdivinar.length);
+      let puntajeFinal =
+        this.puntaje * (this.puntaje / this.palabraAAdivinar.length);
       let puntajeRedondeado = puntajeFinal.toFixed(2);
       this.puntaje = parseFloat(puntajeRedondeado);
       Swal.fire({
@@ -523,6 +527,26 @@ export class AhorcadoComponent {
         title: '¡Ganaste!',
         text: 'Adivinaste la palabra correctamente.',
       });
+      this.registrarPuntaje();
     }
+  }
+
+  registrarPuntaje() {
+    // quién jugó
+    this.usuarioMail = this.authService.getUsuario();
+    const fechaActual = new Date();
+    // en qué día
+    const dia = fechaActual.toISOString().split('T')[0];
+    // en qué hora
+    const hora = fechaActual.toTimeString().split(' ')[0];
+    // qué puntaje obtuvo -> this.tiempo
+
+    let col = collection(this.firestore, 'topAhorcado');
+    addDoc(col, {
+      usuario: this.usuarioMail,
+      puntaje: this.puntaje,
+      dia: dia,
+      hora: hora,
+    });
   }
 }

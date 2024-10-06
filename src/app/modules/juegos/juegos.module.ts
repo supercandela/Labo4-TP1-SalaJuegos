@@ -6,6 +6,7 @@ import { AhorcadoComponent } from './componentes/ahorcado/ahorcado.component';
 import { MayorOMenorComponent } from './componentes/mayor-o-menor/mayor-o-menor.component';
 import { PreguntadosComponent } from './componentes/preguntados/preguntados.component';
 import { CodigoSecretoComponent } from './componentes/codigo-secreto/codigo-secreto.component';
+import { TopResultadosComponent } from './componentes/top-resultados/top-resultados.component';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FormsModule } from '@angular/forms';
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     AhorcadoComponent,
     MayorOMenorComponent,
     PreguntadosComponent,
-    CodigoSecretoComponent
+    CodigoSecretoComponent,
+    TopResultadosComponent
   ],
   imports: [
     CommonModule,

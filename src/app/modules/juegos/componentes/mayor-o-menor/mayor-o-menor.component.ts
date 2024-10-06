@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CartasService } from '../../../../services/cartas.service';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
+import { CartasService } from '../../../../services/cartas.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-mayor-o-menor',
@@ -21,8 +23,13 @@ export class MayorOMenorComponent implements OnInit, OnDestroy {
   puntaje: number = 0;
   secuencia: number = 0;
   partidaFinalizada: boolean = false;
+  private usuarioMail: string = '';
 
-  constructor(private cartasService: CartasService) {}
+  constructor(
+    private cartasService: CartasService,
+    private firestore: Firestore,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.subMazo = this.cartasService.getMazoId().subscribe((mazo) => {
@@ -111,7 +118,27 @@ export class MayorOMenorComponent implements OnInit, OnDestroy {
     if (this.contadorMazo == 51) {
       this.partidaFinalizada = true;
       this.mensajePostEleccion = 'Partida Finalizada.';
+      this.registrarPuntaje();
     }
+  }
+
+  registrarPuntaje() {
+    // quién jugó
+    this.usuarioMail = this.authService.getUsuario();
+    const fechaActual = new Date();
+    // en qué día
+    const dia = fechaActual.toISOString().split('T')[0];
+    // en qué hora
+    const hora = fechaActual.toTimeString().split(' ')[0];
+    // qué puntaje obtuvo -> this.tiempo
+
+    let col = collection(this.firestore, 'topMayorOMenor');
+    addDoc(col, {
+      usuario: this.usuarioMail,
+      puntaje: this.puntaje,
+      dia: dia,
+      hora: hora,
+    });
   }
 
   ngOnDestroy() {

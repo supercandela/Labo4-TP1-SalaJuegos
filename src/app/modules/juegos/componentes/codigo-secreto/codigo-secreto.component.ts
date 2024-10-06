@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-codigo-secreto',
@@ -16,8 +18,9 @@ export class CodigoSecretoComponent {
   intentos: number = 1;
   intentosMaximos: number = 10;
   botonesDeshabilitados: boolean[] = Array(10).fill(false);
+  private usuarioMail: string = '';
 
-  constructor() {
+  constructor(private firestore: Firestore, private authService: AuthService) {
     this.reiniciarPartida();
   }
 
@@ -115,6 +118,7 @@ export class CodigoSecretoComponent {
         title: '¡Ganaste!',
         text: 'Adivinaste el código en: ' + this.tiempo + ' segundos',
       });
+      this.registrarPuntaje();
     } else if (this.intentos >= this.intentosMaximos) {
       Swal.fire({
         icon: 'error',
@@ -123,5 +127,24 @@ export class CodigoSecretoComponent {
       });
     }
     this.intentos++;
+  }
+
+  registrarPuntaje() {
+    // quién jugó
+    this.usuarioMail = this.authService.getUsuario();
+    const fechaActual = new Date();
+    // en qué día
+    const dia = fechaActual.toISOString().split('T')[0];
+    // en qué hora
+    const hora = fechaActual.toTimeString().split(' ')[0];
+    // qué puntaje obtuvo -> this.tiempo
+
+    let col = collection(this.firestore, 'topCodigoSecreto');
+    addDoc(col, {
+      usuario: this.usuarioMail,
+      tiempo: this.tiempo,
+      dia: dia,
+      hora: hora,
+    });
   }
 }
