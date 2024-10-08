@@ -1,0 +1,91 @@
+.encuesta-header {
+    color: red;
+    padding: 10px;
+    text-align: center;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5942752100840336) 30%, rgba(0, 0, 0, 0.33657212885154064) 50%, rgba(0, 0, 0, 0.6587009803921569) 70%, rgba(0, 0, 0, 1) 100%);
+}
+
+.formulario-container {
+    background-color: rgba(48, 48, 48, 0.7);
+    border-radius: 20px;
+}
+
+label {
+    color: rgb(48, 145, 255);
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+input {
+    background-color: transparent;
+    border-bottom: 2px solid rgb(48, 145, 255);
+    color: rgb(48, 145, 255);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input:focus {
+    border: none;
+}
+
+div.campo {
+    margin: 30px;
+    display: inline-block;
+    width: 40%;
+}
+
+div.campo > div {
+    color: rgb(255, 0, 191);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+div.pregunta {
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+div.pregunta > div > div > span.radio-text {
+    background-color: transparent;
+    border-bottom: 2px solid rgb(48, 145, 255);
+    color: rgb(48, 145, 255);
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+div.pregunta > div > select,
+div.pregunta > div > select > option {
+    background-color: transparent;
+    border-bottom: 2px solid rgb(48, 145, 255);
+    color: rgb(48, 145, 255);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+div.pregunta > div > textarea {
+    background-color: transparent;
+    border-bottom: 2px solid rgb(48, 145, 255);
+    color: rgb(48, 145, 255);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+div.pregunta > div.div-mensaje {
+    color: rgb(255, 0, 191);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+button {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(255, 0, 191);
+    background-color: transparent;
+    border: none;
+}

@@ -69,6 +69,8 @@ export class TopResultadosComponent implements OnInit, OnDestroy {
           return fechaA.getTime() - fechaB.getTime();
         });
       }
+      // Filtrar los 10 primeros
+      this.mejoresJugadores = this.mejoresJugadores?.slice(0, 10);
     });
   }
 
