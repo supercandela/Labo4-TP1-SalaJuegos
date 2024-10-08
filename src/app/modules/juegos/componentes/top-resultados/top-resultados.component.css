@@ -13,48 +13,47 @@
     background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5942752100840336) 30%, rgba(0, 0, 0, 0.33657212885154064) 50%, rgba(0, 0, 0, 0.6587009803921569) 70%, rgba(0, 0, 0, 1) 100%);
 }
 
-
 .tabla-puntajes-container {
     margin: 20px auto;
     width: 80%;
     max-width: 800px;
     text-align: center;
-  
-    .tabla-puntajes {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      
-      th, td {
-        padding: 12px 15px;
-        border: 4px solid rgb(255, 0, 191);
-        text-align: center;
-      }
-  
-      th {
-        background-color: rgba(41, 41, 41, 0.7);
-        font-weight: bold;
-        font-size: 25px;
-        color: rgb(48, 145, 255);
-      }
 
-      tbody tr td {
-        color: rgb(48, 145, 255);
-        font-size: 20px;
-        font-weight: bold;
-      }
-  
-      tbody tr {
-        background-color: rgba(48, 48, 48, 0.7);
-      }
-  
-      tbody tr:hover {
-        background-color: rgba(124, 124, 124, 0.7);
-      }
-  
-      td {
-        color: #555;
-      }
+    .tabla-puntajes {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+
+        th,
+        td {
+            padding: 12px 15px;
+            border: 4px solid rgb(255, 0, 191);
+            text-align: center;
+        }
+
+        th {
+            background-color: rgba(41, 41, 41, 0.7);
+            font-weight: bold;
+            font-size: 25px;
+            color: rgb(48, 145, 255);
+        }
+
+        tbody tr td {
+            color: rgb(48, 145, 255);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        tbody tr {
+            background-color: rgba(48, 48, 48, 0.7);
+        }
+
+        tbody tr:hover {
+            background-color: rgba(124, 124, 124, 0.7);
+        }
+
+        td {
+            color: #555;
+        }
     }
-  }
-  
+}

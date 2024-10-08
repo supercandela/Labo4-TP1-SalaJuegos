@@ -72,12 +72,12 @@ export class TopResultadosComponent implements OnInit, OnDestroy {
     });
   }
 
-  convertirTiempo (segundosAConvertir: number) {
+  convertirTiempo(segundosAConvertir: number) {
     // Calculo los minutos
     const minutos = Math.floor(segundosAConvertir / 60);
     // Saco los segundos restantes
     const segundos = segundosAConvertir % 60;
-  
+
     // Formateo segundos menores que 10
     const segundosFormateados = segundos < 10 ? `0${segundos}` : segundos;
     return `${minutos}:${segundosFormateados}`;
