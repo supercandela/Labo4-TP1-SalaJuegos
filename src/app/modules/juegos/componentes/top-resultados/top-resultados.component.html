@@ -1,5 +1,35 @@
 <app-header></app-header>
 
-<h1> {{ juegoId }} </h1>
+<div class="juego-container container-fluid">
+    <div class="row justify-content-center juego-header">
+        <div class="col-12 text-center">
+            <h3>Mejores jugadores: {{ tituloPantalla }} </h3>
+        </div>
+    </div>
+</div>
 
-<p>top-resultados works!</p>
+<div class="tabla-puntajes-container">
+
+    <table class="tabla-puntajes">
+      <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Jugador</th>
+          <th> {{ isCodigoSecreto ? 'Tiempo' : 'Puntaje' }} </th>
+          <th>Día</th>
+          <th>Hora</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jugador of mejoresJugadores; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ jugador.usuario }}</td>
+          <td>{{ jugador.puntaje ? jugador.puntaje : convertirTiempo(jugador.tiempo) }}</td>
+          <td>{{ jugador.dia }}</td>
+          <td>{{ jugador.hora }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
