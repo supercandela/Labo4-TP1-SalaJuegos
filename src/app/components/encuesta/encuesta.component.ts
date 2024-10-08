@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { addDoc, collection, Firestore } from '@angular/fire/firestore';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-encuesta',
@@ -39,7 +40,7 @@ export class EncuestaComponent {
 
   enviarEncuesta() {
     if (this.encuestaForm.valid) {
-      console.log('Formulario válido:', this.encuestaForm.value.nombre);
+      console.log('Formulario válido:', this.encuestaForm.value);
       let col = collection(this.firestore, 'encuestas');
       addDoc(col, {
         apellido: this.encuestaForm.value.apellido,
@@ -50,6 +51,12 @@ export class EncuestaComponent {
         recomendar: this.encuestaForm.value.recomendar,
         telefono: this.encuestaForm.value.telefono,
       });
+      Swal.fire({
+        icon: 'success',
+        title: '¡Gracias!',
+        text: 'Tus opiniones nos ayudan a seguir creciendo.',
+      });
+      this.encuestaForm.reset({edad: 18});
     } else {
       console.log('Formulario no válido');
       this.encuestaForm.markAllAsTouched();
